@@ -262,17 +262,19 @@ elif option=='AYUCARE':
         print(cleaned_prediction)
         prediction_row = data[data.iloc[:, 0] == cleaned_prediction]
         link=(prediction_row.iloc[0,1])
+        print(link)
         response = requests.get(link)
-        img = Image.open(BytesIO(response.content))
-        width_percent = (100 / float(img.size[0]))
-        new_height = int((float(img.size[1]) * float(width_percent)))
+        try:
+            img = Image.open(BytesIO(response.content))
+            width_percent = (100 / float(img.size[0]))
+            new_height = int((float(img.size[1]) * float(width_percent)))
                 
                 # Resize the image
-        img = img.resize((100, new_height), Image.ANTIALIAS)
+            img = img.resize((100, new_height), Image.ANTIALIAS)
         
-        desc=(prediction_row.iloc[0,2])
-        desc=desc.replace(' and ','')
-        st.markdown(
+            desc=(prediction_row.iloc[0,2])
+            desc=desc.replace(' and ','')
+            st.markdown(
                 f"""
                 <div style="display: flex; align-items: center; border: 2px solid #F1597C;border-radius: 8px; padding: 10px;">
         <div style="flex: 1; padding-right: 10px;">
@@ -285,7 +287,8 @@ elif option=='AYUCARE':
                 """,
                 unsafe_allow_html=True
             )
-
+        except:
+            st.write("technical error")
         st.header('Image Gallery')
         
 
@@ -304,6 +307,7 @@ elif option=='AYUCARE':
         cnt=0
         num_cols = 4
         cols = st.columns(num_cols)
+       
         for url in image_links:
             clean_url = url.split('?')[0]
             print("links:"+clean_url)
