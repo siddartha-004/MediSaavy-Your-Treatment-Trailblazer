@@ -13,10 +13,10 @@ from sklearn.neighbors import KNeighborsClassifier
 from streamlit_option_menu import option_menu
 from PIL import Image,UnidentifiedImageError
 import requests
-API_KEY='AIzaSyC0WEvOVTw1MtrdwL22OrHMCBWPtnC4cDo'
-SEARCH_ENGINE_ID='53360f088bc304848'
+API_KEY=''#your api key
+SEARCH_ENGINE_ID='' #your search engine id
 search_query='tribhuvan kirti rasa'
-url='https://www.googleapis.com/customsearch/v1'
+url=''#api of search url
 
 sym_des = pd.read_csv("./symtoms_df.csv")
 precautions = pd.read_csv("./precautions_df.csv")
